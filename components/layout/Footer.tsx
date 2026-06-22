@@ -1,12 +1,28 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin } from "lucide-react";
+import { useEffect, useState } from "react";
 
 const serviceLinks = ["Développement Web", "Applications Mobiles", "Solutions SaaS", "Systèmes CRM", "Intégration IA", "Infrastructure IT"];
 const exploreLinks = ["Accueil", "Services", "Produits", "À propos", "Blog", "Contact"];
 
 export default function Footer() {
+  const [mounted, setMounted] = useState(false);
+  const [shouldUsePc, setShouldUsePc] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const preview = new URLSearchParams(window.location.search).get("preview");
+    const shouldUsePcLayout =
+      preview === "pc" ||
+      (preview !== "mac" && !/Mac|iPhone|iPad|iPod/i.test(navigator.platform));
+
+    setShouldUsePc(shouldUsePcLayout);
+  }, []);
+
   return (
-    <footer id="contact" className="bridge-footer">
+    <footer id="contact" className={`bridge-footer ${mounted && shouldUsePc ? "is-non-mac" : ""}`}>
       <svg className="bridge-footer-clip" width="0" height="0" aria-hidden="true">
         <defs>
           <clipPath id="clip" clipPathUnits="objectBoundingBox">
@@ -36,7 +52,6 @@ export default function Footer() {
               <span>Démarrer un projet</span>
               <ArrowUpRight aria-hidden="true" />
             </Link>
-            <p><span>Bridging Business &amp; Technology</span></p>
           </div>
 
           <nav className="bridge-footer-links" aria-label="Services Full Bridge">

@@ -235,9 +235,15 @@ export default function ContactPage() {
                   onClick={() => setOpenFaq(isOpen ? null : index)}
                 >
                   <span>{faq.question}</span>
-                  <ArrowUpRight aria-hidden="true" />
+                  <ChevronDown aria-hidden="true" />
                 </button>
-                {isOpen ? <p>{faq.answer}</p> : null}
+                <div className="contact-faq-answer-wrapper">
+                  <div className="contact-faq-answer-inner">
+                    <div className="contact-faq-answer-card">
+                      <p>{faq.answer}</p>
+                    </div>
+                  </div>
+                </div>
               </article>
             );
           })}

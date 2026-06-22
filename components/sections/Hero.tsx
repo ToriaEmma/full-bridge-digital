@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { ArrowUpRight, Menu, X } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const heroVideos = [
   "/salihavisuals_pindown.io_1782157331.mp4",
@@ -49,9 +49,21 @@ const navigation = [
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const [shouldUsePc, setShouldUsePc] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+    const preview = new URLSearchParams(window.location.search).get("preview");
+    const shouldUsePcLayout =
+      preview === "pc" ||
+      (preview !== "mac" && !/Mac|iPhone|iPad|iPod/i.test(navigator.platform));
+
+    setShouldUsePc(shouldUsePcLayout);
+  }, []);
 
   return (
-    <main className="bridge-hero">
+    <main className={`bridge-hero ${mounted && shouldUsePc ? "is-non-mac" : ""}`}>
       <header className="bridge-nav">
         <Link href="/" className="bridge-logo" aria-label="Accueil Full Bridge">
           Full Bridge.

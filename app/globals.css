@@ -454,11 +454,14 @@ body {
   border: 1px solid #e4e4e4;
   border-radius: 20px;
   background: transparent;
-  transition: background-color 180ms ease;
+  transition: background-color 450ms cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 450ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .contact-faq-list article.is-open {
-  background: var(--contact-lime);
+  background: var(--color-primary-blue);
+  border-color: var(--color-primary-blue);
+  color: #ffffff;
 }
 
 .contact-faq-list button {
@@ -483,20 +486,48 @@ body {
   width: 40px;
   height: 40px;
   flex: 0 0 auto;
-  padding: 11px;
-  border-radius: 50%;
+  padding: 10px;
+  border-radius: 12px;
   background: #080808;
   color: #ffffff;
-  transition: transform 180ms ease;
+  transition: transform 450ms cubic-bezier(0.16, 1, 0.3, 1),
+              color 450ms cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 450ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .contact-faq-list .is-open button svg {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
+  background: #080808;
+  color: #7DA2FF;
 }
 
-.contact-faq-list article > p {
-  max-width: 760px;
-  margin: -6px 78px 26px 26px;
+.contact-faq-answer-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 450ms cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+}
+
+.contact-faq-list article.is-open .contact-faq-answer-wrapper {
+  grid-template-rows: 1fr;
+}
+
+.contact-faq-answer-inner {
+  min-height: 0;
+  padding: 0 26px 20px 26px;
+}
+
+.contact-faq-answer-card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 22px 26px;
+  margin: 0;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.03), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
+}
+
+.contact-faq-answer-card p {
+  margin: 0;
+  color: #334155;
   font-size: 14px;
   line-height: 1.6;
 }
@@ -658,12 +689,20 @@ body {
   .contact-faq-list button svg {
     width: 34px;
     height: 34px;
-    padding: 9px;
+    padding: 8px;
   }
 
-  .contact-faq-list article > p {
-    margin: -2px 20px 24px;
-    font-size: 14px;
+  .contact-faq-answer-inner {
+    padding: 0 16px 16px 16px;
+  }
+
+  .contact-faq-answer-card {
+    padding: 16px 20px;
+    margin: 0;
+  }
+
+  .contact-faq-answer-card p {
+    font-size: 13px;
   }
 }
 
@@ -1564,24 +1603,22 @@ body {
   margin-top: 60px;
 }
 
+.bridge-work-card {
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.bridge-work-card:hover {
+  transform: translateY(-8px);
+}
+
 .bridge-work-image {
   position: relative;
   width: 100%;
   aspect-ratio: 1.5;
   display: block;
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: 20px;
   background: #dedede;
-}
-
-.bridge-work-image img {
-  object-fit: cover;
-  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.bridge-work-card:hover .bridge-work-image,
-.bridge-work-image:focus,
-.bridge-work-image:active {
   --r: 20px;
   --s: 30px;
   --x: 20px;
@@ -1589,7 +1626,6 @@ body {
   --_m: /calc(2*var(--r)) calc(2*var(--r)) radial-gradient(#000 70%,#0000 72%);
   --_g: conic-gradient(at calc(100% - var(--r)) var(--r),#0000 25%,#000 0);
   --_d: calc(var(--s) + var(--r));
-  border-radius: var(--r);
   -webkit-mask:
     calc(100% - var(--_d) - var(--x)) 0 var(--_m),
     100% calc(var(--_d) + var(--y)) var(--_m),
@@ -1608,8 +1644,13 @@ body {
   mask-repeat: no-repeat;
 }
 
-.bridge-work-image:hover img {
-  transform: scale(1.025);
+.bridge-work-image img {
+  object-fit: cover;
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bridge-work-card:hover .bridge-work-image img {
+  transform: scale(1.03);
 }
 
 .bridge-work-monogram {
@@ -2486,6 +2527,11 @@ body {
   width: min(35vw, 500px);
   flex: 0 0 auto;
   scroll-snap-align: start;
+  transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.bridge-blog-card:hover {
+  transform: translateY(-8px);
 }
 
 .bridge-blog-image {
@@ -2494,18 +2540,8 @@ body {
   aspect-ratio: 1.55;
   display: block;
   overflow: hidden;
-  border-radius: 24px;
+  border-radius: 20px;
   background: #ededed;
-}
-
-.bridge-blog-image img {
-  object-fit: cover;
-  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.bridge-blog-card:hover .bridge-blog-image,
-.bridge-blog-image:focus,
-.bridge-blog-image:active {
   --r: 20px;
   --s: 30px;
   --x: 20px;
@@ -2513,7 +2549,6 @@ body {
   --_m: /calc(2*var(--r)) calc(2*var(--r)) radial-gradient(#000 70%,#0000 72%);
   --_g: conic-gradient(from 180deg at var(--r) calc(100% - var(--r)),#0000 25%,#000 0);
   --_d: calc(var(--s) + var(--r));
-  border-radius: var(--r);
   -webkit-mask:
     calc(var(--_d) + var(--x)) 100% var(--_m),
     0 calc(100% - var(--_d) - var(--y)) var(--_m),
@@ -2532,8 +2567,13 @@ body {
   mask-repeat: no-repeat;
 }
 
-.bridge-blog-image:hover img {
-  transform: scale(1.025);
+.bridge-blog-image img {
+  object-fit: cover;
+  transition: transform 500ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.bridge-blog-card:hover .bridge-blog-image img {
+  transform: scale(1.03);
 }
 
 .bridge-blog-time {
@@ -2691,7 +2731,7 @@ body {
 
 .bridge-footer-socials {
   position: absolute;
-  top: 63px;
+  top: 72px;
   left: 120px;
   z-index: 3;
   display: grid;
@@ -5068,5 +5108,84 @@ body {
     object-position: center;
     -webkit-clip-path: none;
     clip-path: none;
+  }
+}
+
+/* Windows et Linux : hero rectangulaire stable. Mac et mobile gardent la découpe. */
+@media (min-width: 821px) {
+  main.bridge-hero.is-non-mac .bridge-stage {
+    border-radius: 18px;
+    background: #000;
+  }
+
+  main.bridge-hero.is-non-mac .bridge-stage::before,
+  main.bridge-hero.is-non-mac .bridge-stage .bridge-cutout {
+    display: none;
+    content: none;
+  }
+
+  main.bridge-hero.is-non-mac .bridge-stage::after {
+    content: "";
+    display: block;
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    bottom: 0;
+    border-radius: 18px;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.15) 60%, rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+  }
+
+  main.bridge-hero.is-non-mac .bridge-stage > .bridge-hero-video {
+    -webkit-clip-path: none;
+    clip-path: none;
+    border-radius: 18px;
+  }
+
+  main.bridge-hero.is-non-mac .bridge-stage .bridge-copy {
+    position: absolute;
+    top: clamp(40px, 5vw, 80px);
+    bottom: auto;
+    left: 0;
+    z-index: 2;
+    display: block;
+    padding-top: 0;
+    margin-left: clamp(24px, 4vw, 64px);
+    transform: none;
+  }
+
+  main.bridge-hero.is-non-mac .bridge-copy h1,
+  main.bridge-hero.is-non-mac .bridge-team-link {
+    color: #ffffff;
+  }
+
+  main.bridge-hero.is-non-mac .bridge-work-button {
+    background: #ffffff;
+    color: #080808;
+  }
+
+  main.bridge-hero.is-non-mac .bridge-work-button svg {
+    background: #080808;
+    color: #ffffff;
+  }
+
+  .bridge-footer.is-non-mac .bridge-footer-panel.inverted {
+    clip-path: none;
+    border-radius: 18px;
+  }
+
+  .bridge-footer.is-non-mac .bridge-footer-back {
+    color: #ffffff;
+  }
+
+  .bridge-footer.is-non-mac .bridge-footer-back:hover {
+    color: var(--bridge-lime);
+  }
+
+  .bridge-footer.is-non-mac .bridge-footer-socials {
+    top: 120px;
   }
 }
