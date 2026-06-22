@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
+import GlobalScrollBadge from "@/components/layout/GlobalScrollBadge";
 import "./globals.css";
 
 const inter = Inter({
@@ -24,6 +25,7 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col font-sans bg-[#F8FAFC] text-[#0F172A]">
         {children}
+        <GlobalScrollBadge />
         {/* Global SVG clipPaths definitions to prevent browser reference loss during HMR or page transitions */}
         <svg width="0" height="0" style={{ position: "absolute", width: 0, height: 0, overflow: "hidden" }} aria-hidden="true">
           <defs>
@@ -42,4 +44,3 @@ export default function RootLayout({
     </html>
   );
 }
-
